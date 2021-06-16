@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
 
-  def index # DISCLAIMER: I'm not keeping this I just need it to see my viewers
-    user = User.all
-    render json: user.as_json
-  end
+  # def index # DISCLAIMER: I'm not keeping this I just need it to see my users
+  #   user = User.all
+  #   render json: user.as_json
+  # end
 
   def create
     user = User.new(
@@ -28,6 +28,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    user = User.find(params[:id])
+    render json: user.as_json
+  end
+
   def update
     user = User.find(params[:id])
     user.update(
@@ -50,6 +55,12 @@ class UsersController < ApplicationController
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.delete
+    render json: {message: "User has been removed from database."}
   end
 
 end
