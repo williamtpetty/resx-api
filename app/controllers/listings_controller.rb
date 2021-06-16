@@ -17,7 +17,7 @@ class ListingsController < ApplicationController
     if listing.save
       render json: listing.as_json, status: :created
     else
-      render json: { errors: user.errors.full_messages }, status: :bad_request
+      render json: { errors: listing.errors.full_messages }, status: :bad_request
     end
   end
 
