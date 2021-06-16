@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  def index # DISCLAIMER: I'm not keeping this I just need it to see my viewers
+    user = User.all
+    render json: user.as_json
+  end
+
   def create
     user = User.new(
       first_name: params[:first_name],
@@ -11,6 +16,7 @@ class UsersController < ApplicationController
       address: params[:address],
       city: params[:city],
       state: params[:state],
+      zip_code: params[:zip_code],
       about_me: params[:about_me],
       image_url: params[:image_url],
       host: params[:host],
@@ -34,6 +40,7 @@ class UsersController < ApplicationController
         address: params[:address] || user.address,
         city: params[:city] || user.city,
         state: params[:state] || user.state,
+        zip_code: params[:zip_code] || user.zip_code,
         about_me: params[:about_me] || user.about_me,
         image_url: params[:image_url] || user.image_url,
         host: params[:host] || user.host,
