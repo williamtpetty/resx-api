@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
 
   def index
     listing = Listing.all
-    render json: listing.as_json  
+    render json: listing  
   end
 
   def create
@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
       price: params[:price],
     )
     if listing.save
-      render json: listing.as_json, status: :created
+      render json: listing, status: :created
     else
       render json: { errors: listing.errors.full_messages }, status: :bad_request
     end
@@ -23,7 +23,7 @@ class ListingsController < ApplicationController
 
   def show
     listing = Listing.find(params[:id])
-    render json: listing.as_json
+    render json: listing
   end
 
   def update
@@ -37,7 +37,7 @@ class ListingsController < ApplicationController
       price: params[:price] || listing.price,
     )
     if listing.save
-      render json: listing.as_json, status: :created
+      render json: listing, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   # def index # DISCLAIMER: I'm not keeping this I just need it to see my users
   #   user = User.all
-  #   render json: user.as_json
+  #   render json: user
   # end
 
   def create
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       host: params[:host],
     )
     if user.save
-      render json: user.as_json, status: :created
+      render json: user, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    render json: user.as_json
+    render json: user
   end
 
   def update
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
         host: params[:host] || user.host,
       )
     if user.save
-      render json: user.as_json, status: :created
+      render json: user, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end

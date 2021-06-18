@@ -11,7 +11,7 @@ class ImagesController < ApplicationController
       url: params[:url],
     )
     if image.save
-      render json: image.as_json, status: :created
+      render json: image, status: :created
     else
       render json: { errors: image.errors.full_messages }, status: :bad_request
     end
@@ -19,7 +19,7 @@ class ImagesController < ApplicationController
 
   def show
     image = Image.find(params[:id])
-    render json: image.as_json
+    render json: image
   end
 
   def destroy
