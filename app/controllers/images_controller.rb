@@ -1,5 +1,9 @@
 class ImagesController < ApplicationController
 
+  # before_action :authenticate_host 
+  # Do we need this, really? not going to be able to get to images unless we're
+  # already creating or updating a listing, so don't think we need it
+
   # def index #DISCLAIMER: Will remove this, just need it for the time being
   #   image = Image.all
   #   render json: image.as_json
