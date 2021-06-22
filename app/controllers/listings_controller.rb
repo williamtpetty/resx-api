@@ -9,6 +9,7 @@ class ListingsController < ApplicationController
   end
 
   def create
+    coordinates = Geocoder.search(params[:address]).first.coordinates
     listing = Listing.new(
       user_id: current_user.id,
       title: params[:title],
@@ -16,7 +17,10 @@ class ListingsController < ApplicationController
       address: params[:address],
       availability: params[:availability],
       price: params[:price],
+      latitude: coordinates[0],
+      longitude: coordinates[1],
     )
+    # if listing.save && listing.latitude && listing.longitude
     if listing.save
       render json: listing, status: :created
     else
@@ -39,13 +43,23 @@ class ListingsController < ApplicationController
         availability: params[:availability] || listing.availability,
         price: params[:price] || listing.price,
       )
+
+      if params[:address]
+        coordinates = Geocoder.search(listing.address).first.coordinates
+        listing.update(
+          latitude: coordinates[0],
+          longitude: coordinates[1],
+        )
+      end
+
       if listing.save
         render json: listing, status: :created
       else
         render json: { errors: listing.errors.full_messages }, status: :bad_request
       end
+
     else
-      render json: { message: "You are unauthorized to update this listing"}, status: :bad_request
+      render json: { message: "You are unauthorized to update this listing."}, status: :bad_request
     end
   end
 
@@ -58,5 +72,7 @@ class ListingsController < ApplicationController
       render json: { message: "You are unauthorized to update this listing"}, status: :bad_request
     end
   end
+
+  
 
 end

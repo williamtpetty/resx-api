@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
 
+  skip_before_action :authenticate_user, only: [:show]
   # before_action :authenticate_host 
   # Do we need this, really? not going to be able to get to images unless we're
   # already creating or updating a listing, so don't think we need it
