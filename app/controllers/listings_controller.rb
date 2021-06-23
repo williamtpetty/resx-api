@@ -4,12 +4,12 @@ class ListingsController < ApplicationController
   before_action :authenticate_host, except: [:index, :show]
 
   def index
-    listing = Listing.all
+    # listing = Listing.all # we need this back, will order in Vue App
+    listing = Listing.all.order(:id) #remove once starting on front end
     render json: listing  
   end
 
   def create
-    coordinates = Geocoder.search(params[:address]).first.coordinates
     listing = Listing.new(
       user_id: current_user.id,
       title: params[:title],
@@ -17,10 +17,14 @@ class ListingsController < ApplicationController
       address: params[:address],
       availability: params[:availability],
       price: params[:price],
-      latitude: coordinates[0],
-      longitude: coordinates[1],
     )
-    # if listing.save && listing.latitude && listing.longitude
+    if params[:address]
+      coordinates = Geocoder.search(params[:address]).first.coordinates
+      listing.update(
+        latitude: coordinates[0],
+        longitude: coordinates[1],
+      )
+    end
     if listing.save
       render json: listing, status: :created
     else
