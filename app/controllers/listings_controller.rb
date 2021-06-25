@@ -28,7 +28,7 @@ class ListingsController < ApplicationController
     if listing.save
       render json: listing, status: :created
     else
-      render json: { errors: listing.errors.full_messages }, status: :bad_request
+      render json: { errors: listing.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -59,11 +59,11 @@ class ListingsController < ApplicationController
       if listing.save
         render json: listing, status: :created
       else
-        render json: { errors: listing.errors.full_messages }, status: :bad_request
+        render json: { errors: listing.errors.full_messages }, status: :unprocessable_entity
       end
 
     else
-      render json: { message: "You are unauthorized to update this listing."}, status: :bad_request
+      render json: { message: "You are unauthorized to update this listing."}, status: :unauthorized
     end
   end
 

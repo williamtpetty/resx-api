@@ -2,10 +2,10 @@ class UsersController < ApplicationController
 
   skip_before_action :authenticate_user, only: [:create]
 
-  # def index # DISCLAIMER: I'm not keeping this I just need it to see my users
-  #   user = User.all
-  #   render json: user
-  # end
+  def index # DISCLAIMER: I'm not keeping this I just need it to see my users
+    user = User.all
+    render json: user
+  end
 
   def create
     user = User.new(
