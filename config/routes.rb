@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   # get "/images" => "images#index"
   post "/images" => "images#create"
   get "/images/:id" => "images#show"
-  get "/images/:id" => "images#destroy"
+  delete "/images/:id" => "images#destroy"
 
 end

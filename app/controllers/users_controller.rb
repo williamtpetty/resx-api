@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if current_user == user.id
+    if current_user.id == user.id
       user.delete
       render json: {message: "User has been removed from database."}
     end

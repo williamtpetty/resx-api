@@ -5,7 +5,9 @@ class ImagesController < ApplicationController
   # Do we need this, really? not going to be able to get to images unless we're
   # already creating or updating a listing, so don't think we need it
 
-  # def index #DISCLAIMER: Will remove this, just need it for the time being
+  # DISCLAIMER: Will remove this, just need it for the time being
+  # Make sure to add :index to the skip_before above
+  # def index 
   #   image = Image.all
   #   render json: image.as_json
   # end
@@ -15,10 +17,14 @@ class ImagesController < ApplicationController
       listing_id: params[:listing_id],
       url: params[:url],
     )
-    if image.save
-      render json: image, status: :created
+    if current_user.id == image.listing.user_id
+      if image.save
+        render json: image, status: :created
+      else
+        render json: { errors: image.errors.full_messages }, status: :bad_request
+      end
     else
-      render json: { errors: image.errors.full_messages }, status: :bad_request
+      render json: {message: "You are unauthorized to add image to this listing"}, status: 401
     end
   end
 
@@ -29,8 +35,12 @@ class ImagesController < ApplicationController
 
   def destroy
     image = Image.find(params[:id])
-    image.delete
-    render json: {message: "This image has been deleted from the listing"}
+    if current_user.id == image.listing.user_id
+      image.delete
+      render json: {message: "This image has been removed from listing"}, status: :ok
+    else
+      render json: {message: "You are unauthorized to remove this image"}, status: 401
+    end
   end
 
 end

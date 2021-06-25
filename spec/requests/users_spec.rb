@@ -5,7 +5,7 @@ RSpec.describe "Users", type: :request do
     # create users for validations
     user = User.create({first_name: "William", last_name: "Petty", email: "pettwil1131@gmail.com", phone_number: "5555555555", address: "1131 Harbor River Cv", city: "Memphis", state: "TN", about_me: "Hey I'm Will. I live in Memphis, TN and I enjoy duck hunting, fishing, golf, and gardening.", image_url: "https://avatars.githubusercontent.com/u/77342332?v=4", host: true, password: "password", zip_code: "38103"})
 
-    user2 = User.create([{first_name: "Evan", last_name: "Mallard", email: "evan@gmail.com", phone_number: "5555555555", address: "1154 Harbor River Cv", city: "Memphis", state: "TN", about_me: "Etiam sit amet nisl purus in mollis nunc sed id. Aenean euismod elementum nisi quis.", image_url: "https://www.stevensegallery.com/640/360", host: false, password: "password", password_confirmation: "password", zip_code: "38103"}])
+    user2 = User.create({first_name: "Evan", last_name: "Mallard", email: "evan@gmail.com", phone_number: "5555555555", address: "1154 Harbor River Cv", city: "Memphis", state: "TN", about_me: "Etiam sit amet nisl purus in mollis nunc sed id. Aenean euismod elementum nisi quis.", image_url: "https://www.stevensegallery.com/640/360", host: false, password: "password", password_confirmation: "password", zip_code: "38103"})
   end
   describe "GET /users/:id" do
     # no index - starting w/ user show
@@ -106,7 +106,6 @@ RSpec.describe "Users", type: :request do
       # works w/ both users, but only if you select correct id in patch req.
       jwt = JWT.encode({user_id: User.first.id, exp: 24.hours.from_now.to_i}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
 
-      #
       patch "/users/#{User.first.id}", params: {
         first_name: "Second",
         last_name: "Lastname",
@@ -114,6 +113,16 @@ RSpec.describe "Users", type: :request do
       }
 
       expect(response).to have_http_status(401)
+    end
+  end
+
+  describe "DELETE /users/:id" do
+    it 'deletes user based on :id matching jwt' do
+      jwt = JWT.encode({user_id: User.first.id, exp: 24.hours.from_now.to_i}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
+
+      delete "/users/#{User.first.id}", headers: {"Authorization" => "Bearer #{jwt}"}
+
+      expect(response).to have_http_status(200)
     end
   end
 end
