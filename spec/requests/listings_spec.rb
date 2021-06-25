@@ -19,7 +19,7 @@ RSpec.describe "Listings", type: :request do
     it "returns an array of listings objects" do
       # send get listings index request
       get "/listings"
-      # sets listings to response
+      # sets variable listings to the body key of the response array
       listings = JSON.parse(response.body)
       # if successful response, returns a 200 http status
       expect(response).to have_http_status(200)
@@ -59,11 +59,11 @@ RSpec.describe "Listings", type: :request do
         price: "100 bucks",
       }, headers: {"Authorization" => "Bearer #{jwt}"}
 
-      post = JSON.parse(response.body)
+      listing = JSON.parse(response.body)
 
       expect(response).to have_http_status(201)
-      expect(post["title"]).to eq("This is a test title")
-      expect(post["address"]).to eq("This is a test address")
+      expect(listing["title"]).to eq("This is a test title")
+      expect(listing["address"]).to eq("This is a test address")
 
     end
     
@@ -80,7 +80,7 @@ RSpec.describe "Listings", type: :request do
         price: "100 bucks",
       }, headers: {"Authorization" => "Bearer #{jwt}"}
       
-      post = JSON.parse(response.body)
+      listing = JSON.parse(response.body)
 
       expect(response).to have_http_status(401)
     end
@@ -97,11 +97,52 @@ RSpec.describe "Listings", type: :request do
         price: "100 bucks",
       }, headers: {"Authorization" => "Bearer #{jwt}"}
       
-      post = JSON.parse(response.body)
+      listing = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
     end
-
   end
 
+  describe "PATCH /listings/:id" do
+    it 'updates a listing based on defined parameters' do
+      jwt = JWT.encode({user_id: User.first.id, exp: 24.hours.from_now.to_i}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
+
+      # remainder will populate with current information
+      patch "/listings/#{Listing.first.id}", params: {
+        address: "This is a test address",
+        availability: "This will be available in a couple weeks",
+        price: "100 bucks",
+      }, headers: {"Authorization" => "Bearer #{jwt}"}
+      
+      listing = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:created)
+      expect(listing["address"]).to eq("This is a test address")
+      expect(listing["price"]).to eq("100 bucks")
+    end
+
+    it 'returns 401 unauthorized if user is not host' do
+      # second user not host, should return unauthorized
+      jwt = JWT.encode({user_id: User.second.id, exp: 24.hours.from_now.to_i}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
+
+      # user_id not needed, but tested to make sure it worked both ways
+      patch "/listings/#{Listing.first.id}", params: {
+        address: "This is a test address",
+        availability: "This will be available in a couple weeks",
+        price: "100 bucks",
+      }, headers: {"Authorization" => "Bearer #{jwt}"}
+      
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
+  describe "DELETE /listings/:id" do
+    it 'destroys listing based on :id' do
+      jwt = JWT.encode({user_id: User.first.id, exp: 24.hours.from_now.to_i}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
+
+      delete "/listings/#{Listing.first.id}", headers: {"Authorization" => "Bearer #{jwt}"}
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end
