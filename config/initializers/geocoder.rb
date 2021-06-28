@@ -7,7 +7,7 @@ Geocoder.configure(
   # use_https: false,           # use HTTPS for lookup requests? (if supported)
   # http_proxy: nil,            # HTTP proxy server (user:pass@host:port)
   # https_proxy: nil,           # HTTPS proxy server (user:pass@host:port)
-  api_key: "pk.eyJ1Ijoid2lsbGlhbXRwZXR0eSIsImEiOiJja3B6d2t4YTIwN2JoMnR0bHliNnlhN3JxIn0.6ldMEPx_v-r54M-OZ_QCeQ",               # API key for geocoding service
+  api_key: Rails.application.credentials.MAPBOX_API_TOKEN!,               # API key for geocoding service
   # cache: nil,                 # cache object (must respond to #[], #[]=, and #del)
   # cache_prefix: 'geocoder:',  # prefix (string) to use for all cache keys
 
