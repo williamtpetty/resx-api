@@ -47,7 +47,6 @@ class ListingsController < ApplicationController
         availability: params[:availability] || listing.availability,
         price: params[:price] || listing.price,
       )
-
       if params[:address]
         coordinates = Geocoder.search(listing.address).first.coordinates
         listing.update(
