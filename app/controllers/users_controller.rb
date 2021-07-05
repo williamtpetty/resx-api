@@ -14,14 +14,14 @@ class UsersController < ApplicationController
       email: params[:email],
       password: params[:password],
       password_confirmation: params[:password_confirmation],
-      # phone_number: params[:phone_number],
-      # address: params[:address],
-      # city: params[:city],
-      # state: params[:state],
-      # zip_code: params[:zip_code],
-      # about_me: params[:about_me],
-      # image_url: params[:image_url],
-      # host: params[:host],
+      phone_number: params[:phone_number],
+      address: params[:address],
+      city: params[:city],
+      state: params[:state],
+      zip_code: params[:zip_code],
+      about_me: params[:about_me],
+      image_url: params[:image_url],
+      host: params[:host],
     )
     if user.save
       render json: user, status: :created
