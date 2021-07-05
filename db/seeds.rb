@@ -44,12 +44,22 @@ require 'faker'
 #   {first_name: "Ben", last_name: "McFadden", email: "benmcfadden@gmail.com", phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.street_address, city: Faker::Address.city, state: Faker::Address.state_abbr, password: "password", password_confirmation: "password", about_me: Faker::Hipster.paragraph(sentence_count: 4), image_url: Faker::LoremFlickr.image(size: "300x300", search_terms: ['people']), zip_code: Faker::Address.zip_code, host: false}
 # ])
 
-
 # 40.times do
-#   Listing.create!({user_id: hosts.sample.id, title: Faker::Commerce.department(max: 5, fixed_amount: true), description: Faker::Hipster.paragraph(sentence_count: 6), address: Faker::Address.full_address, availability: Faker::Date.between(from: '2021-11-26', to: '2022-01-31'), price: "150/day without a guide, $250/day with a guide."})
+#   locations = ["752 State Hwy 306, Earle, AR 72331, USA", "647 Co Rd 806, Parkin, AR 72373, USA", "127 McCoy Rd, Stuttgart, AR 72160", "1131 Harbor River Cove, Memphis, TN, 38103", "1162 Isle View Dr, Memphis, TN 38103", "27890 White Rd, Trumann, AR 72472"]
+
+#   Listing.create({user_id: hosts.sample.id, title: Faker::Commerce.department(max: 5, fixed_amount: true), description: Faker::Hipster.paragraph(sentence_count: 6), address: locations.sample, availability: Faker::Date.between(from: '2021-11-26', to: '2022-01-31'), price: "150/day without a guide, $250/day with a guide."})
 # end
 
 # 240.times do
 #   listings = Listing.all
 #   Image.create({listing_id: listings.sample.id, url: Faker::LoremFlickr.image(size: "300x300", search_terms: ['animals'])})
+# end
+
+# listings = Listing.all
+# listings.each do |listing|
+#   coordinates = Geocoder.search(listing.address).first.coordinates
+#   listing.update(
+#     latitude: coordinates[0],
+#     longitude: coordinates[1],
+#   )
 # end
