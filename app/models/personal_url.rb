@@ -1,2 +1,0 @@
-class PersonalUrl < ApplicationRecord
-end

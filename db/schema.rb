@@ -35,13 +35,6 @@ ActiveRecord::Schema.define(version: 2021_07_10_161211) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "personal_urls", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "personal_url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
