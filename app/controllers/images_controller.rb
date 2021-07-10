@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
 
-  skip_before_action :authenticate_user, only: [:index, :show, :create]
+  skip_before_action :authenticate_user, only: [:show, :create]
 
   # before_action :authenticate_host, only: [:index]
   # Do we need this, really? not going to be able to get to images unless we're
@@ -9,10 +9,10 @@ class ImagesController < ApplicationController
   # DISCLAIMER: Will remove this, just need it for the time being
   # Make sure to add :index to the skip_before above
 
-  def index 
-    image = Image.all
-    render json: image.as_json
-  end
+  # def index 
+  #   image = Image.all
+  #   render json: image.as_json
+  # end
 
   def create
     image = Image.new(

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   has_many :listings, dependent: :destroy
+  has_many :personal_urls, dependent: :destroy
 
   has_secure_password
   validates :email, presence: true, uniqueness: true
