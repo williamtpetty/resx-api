@@ -1,0 +1,2 @@
+class PersonalUrl < ApplicationRecord
+end

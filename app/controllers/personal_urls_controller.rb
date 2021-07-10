@@ -1,0 +1,2 @@
+class PersonalUrlsController < ApplicationController
+end
