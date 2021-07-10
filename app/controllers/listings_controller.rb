@@ -69,7 +69,7 @@ class ListingsController < ApplicationController
   def destroy
     listing = Listing.find(params[:id])
     if current_user.id == listing.user_id
-      listing.delete
+      listing.destroy
       render json: {message: "Listing has been deleted."}
     else
       render json: { message: "You are unauthorized to update this listing"}, status: :bad_request

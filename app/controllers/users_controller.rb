@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authenticate_user, only: [:create]
+  skip_before_action :authenticate_user, only: [:index, :create]
 
   def index # DISCLAIMER: I'm not keeping this I just need it to see my users
     user = User.all
@@ -63,9 +63,11 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
+    listings = user.listings
     if current_user.id == user.id
-      user.delete
-      render json: {message: "User has been removed from database."}
+      user.destroy
+      listings.destroy_all
+      render json: {message: "User and all associated listings and images have been removed from database."}
     end
   end
 
