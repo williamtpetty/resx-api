@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/images/:id" => "images#show"
   delete "/images/:id" => "images#destroy"
 
-  post "/personal_url" => "personal_url#create"
+  post "/personal_urls" => "personal_url#create"
+  delete "/personal_urls/:id" => "personal_url#destroy"
 
 end
