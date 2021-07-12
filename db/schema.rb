@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_12_172516) do
+ActiveRecord::Schema.define(version: 2021_07_12_192448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.integer "listing_id"
@@ -40,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_07_12_172516) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.text "body"
+    t.integer "conversation_id"
   end
 
   create_table "personal_urls", force: :cascade do |t|

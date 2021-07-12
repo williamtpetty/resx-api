@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   get "/messages" => "messages#index"
   post "/messages" => "messages#create"
 
+  get "/conversations" => "conversations#index"
+  post "/conversations" => "conversations#create"
+  get "/conversations/:id" => "conversations#show"
+
   post "/personal_urls" => "personal_urls#create"
   delete "/personal_urls/:id" => "personal_urls#destroy"
 
