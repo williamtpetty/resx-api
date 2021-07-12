@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   def index
     messages = Message.all
-    render json: messages.as_json
+    render json: messages.order(:created_at => :desc)
   end
   
   def create
