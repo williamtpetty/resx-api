@@ -17,6 +17,11 @@ class PersonalUrlsController < ApplicationController
     end
   end
 
+  def show
+    personal_urls = PersonalUrl.find_by(user_id: params[:user_id])
+    render json: personal_url.as_json
+  end
+
   def destroy
     personal_url = PersonalUrl.find(params[:id])
     personal_url.destroy

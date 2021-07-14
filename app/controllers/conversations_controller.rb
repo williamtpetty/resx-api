@@ -11,6 +11,10 @@ class ConversationsController < ApplicationController
       receiver_id: params[:receiver_id],
     )
     if conversation.save
+      #Message.new(
+        # user_id: current_user.id,
+          #body: params[:body],
+          #conversation_id: conversation.id)
       render json: conversation
     else
       render json: {errors: conversation.errors.full_messages}, status: :unprocessable_entity
