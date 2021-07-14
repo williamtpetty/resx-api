@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   post "/conversations" => "conversations#create"
   get "/conversations/:id" => "conversations#show"
 
+  get "/personal_urls" => "personal_urls#index"
   post "/personal_urls" => "personal_urls#create"
   delete "/personal_urls/:id" => "personal_urls#destroy"
 

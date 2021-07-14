@@ -7,8 +7,8 @@ class ConversationsController < ApplicationController
   
   def create
     conversation = Conversation.new(
-      sender_id: current_user.id
-      receiver_id: params[:receiver_id]
+      sender_id: params[:sender_id],
+      receiver_id: params[:receiver_id],
     )
     if conversation.save
       render json: conversation

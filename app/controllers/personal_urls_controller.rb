@@ -1,8 +1,13 @@
 class PersonalUrlsController < ApplicationController
 
+  def index
+    personal_urls = PersonalUrl.all
+    render json: personal_urls
+  end
+
   def create
     personal_url = PersonalUrl.new(
-      user_id: current_user.id,
+      user_id: params[:user_id],
       personal_url: params[:personal_url]
     )
     if personal_url.save
