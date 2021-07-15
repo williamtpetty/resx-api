@@ -49,27 +49,41 @@ users = User.create!([
 #   {first_name: "Ben", last_name: "McFadden", email: "benmcfadden@gmail.com", phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.street_address, city: Faker::Address.city, state: Faker::Address.state_abbr, password: "password", password_confirmation: "password", about_me: Faker::Hipster.paragraph(sentence_count: 4), image_url: Faker::LoremFlickr.image(size: "300x300", search_terms: ['people']), zip_code: Faker::Address.zip_code, host: false}
 # ])
 
-# 40.times do
-#   locations = ["752 State Hwy 306, Earle, AR 72331, USA", "647 Co Rd 806, Parkin, AR 72373, USA", "127 McCoy Rd, Stuttgart, AR 72160", "1131 Harbor River Cove, Memphis, TN, 38103", "3155 Dee Webb Rd Ripley, TN 38063", "27890 White Rd, Trumann, AR 72472"]
+# locations = ["752 State Hwy 306, Earle, AR 72331, USA", "647 Co Rd 806, Parkin, AR 72373, USA", "127 McCoy Rd, Stuttgart, AR 72160", "1131 Harbor River Cove, Memphis, TN, 38103", "3155 Dee Webb Rd Ripley, TN 38063", "27890 White Rd, Trumann, AR 72472"]
 
-#   Listing.create({user_id: hosts.sample.id, title: Faker::Commerce.department(max: 5, fixed_amount: true), description: Faker::Hipster.paragraph(sentence_count: 6), address: locations.sample, availability: Faker::Date.between(from: '2021-11-26', to: '2022-01-31'), price: "150/day without a guide, $250/day with a guide."})
-# end
+5.times do
+  Listing.create({user_id: hosts[0].id, title: "Listing Available in Earle, AR", description: "Meat Eater chronicles Rinella’s lifelong relationship with nature and hunting through the lens of ten hunts, beginning when he was an aspiring mountain man at age ten and ending as a thirty-seven-year-old Brooklyn father who hunts in the remotest corners of North America. He tells of having a struggling career as a fur trapper just as fur prices were falling; of a dalliance with catch-and-release steelhead fishing; of canoeing in the Missouri Breaks in search of mule deer just as the Missouri River was freezing up one November; and of hunting the elusive Dall sheep in the glaciated mountains of Alaska. Through each story, Rinella grapples with themes such as the role of the hunter in shaping America, the vanishing frontier, the ethics of killing, the allure of hunting trophies, the responsibilities that human predators have to their prey, and the disappearance of the hunter himself as Americans lose their connection with the way their food finds its way to their tables. Hunting, he argues, is intimately connected with our humanity; assuming responsibility for acquiring the meat that we eat, rather than entrusting it to proxy executioners, processors, packagers, and distributors, is one of the most respectful and exhilarating things a meat eater can do.", address: "752 State Hwy 306, Earle, AR 72331, USA", availability: "Available every weekend in the 2021-22 season.", price: "$300/weekend without a guide, $600/weekend with a guide. Sorry, but we cannot lease individual days"})
+end
 
-# 240.times do
-#   listings = Listing.all
-#   Image.create({listing_id: listings.sample.id, url: Faker::LoremFlickr.image(size: "300x300", search_terms: ['animals'])})
-# end
+5.times do
+  Listing.create({user_id: hosts[1].id, title: "Listing Available in Parkin, AR", description: "I grew up in Twin Lake, Michigan, the son of a hunter who taught his three sons to love the natural world the way he did. As a child, Rinella devoured stories of the American wilderness, especially the exploits of his hero, Daniel Boone. He began fishing at the age of three and shot his first squirrel at eight and his first deer at thirteen. He chose the colleges he went to by their proximity to good hunting ground, and he experimented with living solely off wild meat. As an adult, he feeds his family from the food he hunts. Meat Eater chronicles Rinella’s lifelong relationship with nature and hunting through the lens of ten hunts, beginning when he was an aspiring mountain man at age ten and ending as a thirty-seven-year-old Brooklyn father who hunts in the remotest corners of North America. He tells of having a struggling career as a fur trapper just as fur prices were falling; of a dalliance with catch-and-release steelhead fishing; of canoeing in the Missouri Breaks in search of mule deer just as the Missouri River was freezing up one November; and of hunting the elusive Dall sheep in the glaciated mountains of Alaska.", address: "647 Co Rd 806, Parkin, AR 72373, USA", availability: Faker::Date.between(from: '2021-11-26', to: '2022-01-31'), price: "150/day without a guide, $250/day with a guide."})
+end
 
-# listings = Listing.all
-# listings.each do |listing|
-#   coordinates = Geocoder.search(listing.address).first.coordinates
-#   listing.update(
-#     latitude: coordinates[0],
-#     longitude: coordinates[1],
-#   )
-# end
+5.times do
+  Listing.create({user_id: hosts[2].id, title: "Lease Available in Ripley, TN", description: "This volume has something for everyone who hunts, be they rabbit hunters in the deep South, Cape buffalo hunters in the African bush, or white-tailed deer hunters in the woods of North America. Its selections celebrate hunting for big game, small game, waterfowl, upland birds, turkeys, African and Asian game, and much more. Readers will find many of their favorite writers represented here, along with authors who have penned inspired pieces that few have read, until now. The book has been put together in keeping with the spirit and philosophy of Theodore Roosevelt, our twenty-sixth president, who not only believed in the preservation of our wildlife and natural resources, but in the importance of hunting to the fabric of American life. Part of the proceeds from this book will go to the Theodore Roosevelt Conservation Partnership, a coalition of organizations and individual grassroots partners working together to preserve the traditions of hunting and fishing.", address: "3155 Dee Webb Rd Ripley, TN 38063", availability: "This lease is available all season, 11/26/21 - 1/21/22", price: "$11,000 for the whole season"})
+end
 
-# 57.times do
-#   users = User.all
-#   PersonalUrl.create!({user_id: users.sample.id, personal_url: Faker::Internet.url})
-# end
+5.times do
+  Listing.create({user_id: hosts[3].id, title: "Listing Available in Parkin, AR", description: "Even among the mighty mountain men, Jim Bridger was a towering figure. He was one of the greatest explorers and pathfinders in American history. He couldn't write his name, but at eighteen he had braved the fury of the Missouri, ascending it in a keelboat flotilla commanded by that stalwart Mike Fink. By 1824, when he was only twenty, he had discovered the Great Salt Lake. Later he was to open the Overland Route, which was the path of the Overland Stage, the Pony Express, and the Union Pacific. One of the foremost trappers in the Rocky Mountain Fur Company, he was a legend in his own time as well as ours. He remains one of the most important scouts and guides in the history of the West.The Christian Science Monitor has called this biography 'probably the fairest portrait of Jim Bridger in existence.' The New York Times has praise for a 'painstaking job of research among the usual Bridger sources and among some others which have been neglected. . . . [The author] has adequately set the scene for his hero's adventures and has honestly appraised the great guide's historical stature.' Other Bison Books by Stanley Vestal: Dodge City: Queen of Cowtowns, Joe Meek: The Merry MOuntain Man; The Missouri, The Old Santa Fe Trail, and Warpath: The True Story of the Fighting Sioux Told in a Biography of Chief White Bull", availability: Faker::Date.between(from: '2021-11-26', to: '2022-01-31'), price: "150/day without a guide, $250/day with a guide."})
+end
+
+listings = Listing.all
+listings.each do |listing|
+  coordinates = Geocoder.search(listing.address).first.coordinates
+  listing.update(
+    latitude: coordinates[0],
+    longitude: coordinates[1],
+  )
+end
+
+160.times do
+  listings = Listing.all
+  images = ["https://www.bustntails.com/wp-content/uploads/2015/12/ARscenery.jpg", "https://www.outdoorproperties.com/wp-content/uploads/2014/03/1110.jpg", "https://www.goosegrinders.com/uploads/photos/Arkansas_Duck_Hunting_Flying.jpg", "https://farmflavor.com/wp-content/uploads/2020/05/16301SUB008.jpg", "https://duazurecdn.azureedge.net/media-manager/20170830/915a49cd-13cb-4105-b39d-f770540a8f0d/768/Conservation.jpg", "https://agfax.com/wp-content/uploads/rice-fields-after-harvest-geese-arkansas.jpg", "https://lh3.googleusercontent.com/proxy/a0YQ12B29Xky2_9EVHo8EzYQjCTryUZyAtwbcN0uSY7bkiOtxj-eE4hjhB-eWpyqMJgd1O8rLD19i5WmoX4ZObaUnb7feOQR8u8fhRnTN2ESMulpDe_b4cYgvnsyLPwkssQt2Vr2mqwfW7hO", "https://i.pinimg.com/originals/12/13/2a/12132a252459ad1ff4fae0839b2e14fa.jpg", "https://www.waterfowlproperties.com/uploads/blogs/7804/duck_hunting_land__large.jpg", "https://i.pinimg.com/originals/ab/41/d5/ab41d5efe9a880fc0e47828563f991d4.jpg", "https://duazurecdn.azureedge.net/media-manager/20190218/b89d6f56-815f-4ca2-aa56-0317e3ff12c8/768/Untitled-19.png", "https://www.tripsavvy.com/thmb/lx8uq0EAW1QcE3uKQaU5aGUz01o=/762x429/filters:no_upscale():max_bytes(150000):strip_icc()/21687773_10155743826553234_4991383597130235038_n-59ea1792519de200126dbcb7.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/11/ee/94/81/deer-upstaged-by-a-duck.jpg", "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/07/1030_duck_fish_eggs.jpg", "https://www.allaboutbirds.org/guide/assets/photo/300196861-480px.jpg", "https://pyxis.nymag.com/v1/imgs/a9e/265/89a838cbef7800893d235460f417db7cd4-29-mandarin-duck.rsquare.w700.jpg", "https://i.guim.co.uk/img/media/0c2f314802f5d79bf954c1906679e0c61668000e/0_0_1894_11[…]lity=85&auto=format&fit=max&s=8185166740ffcca3f9536d7b2640a835", "https://media.nbcphiladelphia.com/2019/09/whitetail-deer-buck-generic.jpg?quality=85&strip=all&resize=850%2C478", "https://ke-courses-production.s3.amazonaws.com/asset_files/production/111/attachments/original/glossary-m-whitetail.jpg?1600789688", "https://news.psu.edu/sites/default/files/styles/threshold-992/public/buck%20Kosack-PGC%20photo_0.jpg?itok=fOurHRSm", "https://www.101highlandlakes.com/uploads/media/default/0001/33/3be12c5f15d64077e50bc5d4214895ec10ce4eec.jpeg", "https://naturemuseum.org/wp-content/uploads/2020/09/41a2529e-d30f-4108-8259-83045fb64a37.png", "https://interpretivecenter.org/wp-content/uploads/2020/09/duck-4077117_640.jpg", "https://www.wideopenpets.com/wp-content/uploads/2020/09/What-is-a-group-of-ducks-called-770x405.png", "https://www.realtree.com/sites/default/files/styles/site_large/public/content/inserts/2020/caustinross-mallard.jpg?itok=lR77C0zg", "https://i.pinimg.com/originals/00/c5/a0/00c5a004ebf97c40660e329932b138bb.jpg", "https://www.birdsofcolombia.org/mexico/Green-winged_Teal.jpg", "https://www.mindenpictures.com/cache/pcache2/00529082.jpg", "https://gdb.voanews.com/D1AC130C-23B0-4F22-A474-0CE5A310313C_w408_r1_s.jpg", "https://www.noble.org/globalassets/images/news/ag-news-and-views/2012/10/hero/duck-foods.jpg?height=315&width=600&mode=crop", "https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/a[…]018-itsaduckmp4.transform/content-tile-large/image.png", "https://www.petassure.com/petassure/file-streams/page/yFvV93O9wo3OAbHr00Mz57newsletter-ducks.jpg", "https://www.bemidjipioneer.com/incoming/6625424-yymyct-Wood-duck.jpg/alternates/BASE_LANDSCAPE/Wood%20duck.jpg", "https://www.allaboutbirds.org/guide/assets/photo/63892941-480px.jpg", "https://www.beardsleyzoo.org/uploads/1/2/4/2/124214186/published/209.jpg?1591062727", "https://duazurecdn.azureedge.net/media-manager/20160829/cb129bf8-9d8a-4c76-8863-d27ada5d7[…]22-joseph-motto-04xxxxnorthern-pintail-male7-DU-jpeg.jpg", "https://duazurecdn.azureedge.net/waterfowl-species/1/10/images/1/480/1.jpg"]
+  Image.create({listing_id: listings.sample.id, url: images.sample})
+end
+
+
+21.times do
+  users = User.all
+  PersonalUrl.create!({user_id: users.sample.id, personal_url: Faker::Internet.url})
+end
