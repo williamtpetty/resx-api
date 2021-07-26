@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   get "/personal_urls/:id" => "personal_urls#show"
   delete "/personal_urls/:id" => "personal_urls#destroy"
 
+  get "/#path" => proc { [200, {}, [ActionView::Base.new.render(file: 'public/index.html')]] }
+
 end
