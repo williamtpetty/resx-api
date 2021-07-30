@@ -54,7 +54,7 @@ RSpec.describe "Listings", type: :request do
         user_id: User.first.id, 
         title: "This is a test title",
         description: "Here is a test description",
-        address: "This is a test address",
+        address: "1131 Harbor River Cv, Memphis, TN 38103",
         availability: "This will be available in a couple weeks",
         price: "100 bucks",
       }, headers: {"Authorization" => "Bearer #{jwt}"}
@@ -63,7 +63,7 @@ RSpec.describe "Listings", type: :request do
 
       expect(response).to have_http_status(201)
       expect(listing["title"]).to eq("This is a test title")
-      expect(listing["address"]).to eq("This is a test address")
+      expect(listing["address"]).to eq("1131 Harbor River Cv, Memphis, TN 38103")
 
     end
     
@@ -75,7 +75,7 @@ RSpec.describe "Listings", type: :request do
         user_id: User.first.id, 
         title: "This is a test title",
         description: "Here is a test description",
-        address: "This is a test address",
+        address: "1131 Harbor River Cv, Memphis, TN 38103",
         availability: "This will be available in a couple weeks",
         price: "100 bucks",
       }, headers: {"Authorization" => "Bearer #{jwt}"}
@@ -85,14 +85,14 @@ RSpec.describe "Listings", type: :request do
       expect(response).to have_http_status(401)
     end
 
-    it 'returns unprocessable entity (422) if unauthorized user' do
+    it 'returns unprocessable entity (422) if params are not passed' do
       # passes JWT from first user
       jwt = JWT.encode({user_id: User.first.id, exp: 24.hours.from_now.to_i}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
 
       # missing title: and description: which must be validated
       post "/listings", params: {
         user_id: User.first.id, 
-        address: "This is a test address",
+        address: "1131 Harbor River Cv, Memphis, TN 38103",
         availability: "This will be available in a couple weeks",
         price: "100 bucks",
       }, headers: {"Authorization" => "Bearer #{jwt}"}
