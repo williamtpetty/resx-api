@@ -53,7 +53,7 @@ RSpec.describe "Listings", type: :request do
       post "/listings", params: {
         user_id: User.first.id, 
         title: "This is a test title",
-        description: "Here is a test description",
+        description: "Here is a test description. Here is a test description. Here is a test description. Here is a test description. Here is a test description. Here is a test description. Here is a test description.",
         address: "1131 Harbor River Cv, Memphis, TN 38103",
         availability: "This will be available in a couple weeks",
         price: "100 bucks",
